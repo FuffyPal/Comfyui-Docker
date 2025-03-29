@@ -8,8 +8,12 @@
 
 #### nvidia container toolkit wiki:https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
 
+### pull
+```sh
+docker pull littlefile/comfyui
+podman pull littlefile/comfyui
+```
 ### RUN
-
 
 ```sh
 $podman run  -v sdmodels:/models --name comfyui -p 8188:8188 -d --device nvidia.com/gpu=all --rm --security-opt=label=disable comfyui:latest
