@@ -1,4 +1,4 @@
-FROM docker.io/pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
+FROM docker.io/pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
 
 LABEL forked from https://github.com/comfyanonymous/ComfyUI
 LABEL DEVEL=" github:little-file github link:https://github.com/little-file"
