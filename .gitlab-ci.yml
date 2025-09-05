@@ -1,0 +1,28 @@
+# Docker imajlarını oluşturmak ve göndermek için Docker servisinin kullanılmasını sağlar.
+services:
+  - docker:dind
+
+# Docker komutlarını çalıştırmak için Docker-in-Docker imajını kullanırız.
+image: docker:20.10.16
+
+variables:
+  # Container Registry adresini dinamik olarak tanımlar.
+  CONTAINER_REGISTRY_URL: $CI_REGISTRY_IMAGE
+
+stages:
+  - build
+
+# 'build-image' adında bir job tanımlıyoruz. Bu job, 'build' aşamasında çalışacak.
+build-image:
+  stage: build
+  script:
+    # 1. GitLab Container Registry'ye giriş yap. GitLab'in kendi CI/CD değişkenlerini kullanıyoruz.
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+    # 2. Dockerfile'ı kullanarak yeni bir imaj oluştur ve onu etiketle.
+    - docker build --pull -t $CONTAINER_REGISTRY_URL:$CI_COMMIT_REF_SLUG .
+    - docker tag $CONTAINER_REGISTRY_URL:$CI_COMMIT_REF_SLUG $CONTAINER_REGISTRY_URL:latest
+
+    # 3. Oluşturulan imajı GitLab Container Registry'ye gönder.
+    - docker push $CONTAINER_REGISTRY_URL:$CI_COMMIT_REF_SLUG
+    - docker push $CONTAINER_REGISTRY_URL:latest
