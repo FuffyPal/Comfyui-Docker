@@ -10,8 +10,8 @@
 
 ### pull
 ```sh
-docker pull littlefile/comfyui
-podman pull littlefile/comfyui
+docker pull registry.gitlab.com/fluffypal/comfyui-docker
+podman pull registry.gitlab.com/fluffypal/comfyui-docker
 ```
 ### RUN
 
