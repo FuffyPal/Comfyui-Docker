@@ -27,7 +27,7 @@ build-image:
     - docker push $CONTAINER_REGISTRY_URL:$CI_COMMIT_REF_SLUG
     - docker push $CONTAINER_REGISTRY_URL:latest
 
-build-image:
+build-image-test:
   stage: build
   script:
     # 1. GitLab Container Registry'ye giriş yap. GitLab'in kendi CI/CD değişkenlerini kullanıyoruz.
