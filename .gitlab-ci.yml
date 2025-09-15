@@ -34,7 +34,7 @@ build-image:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
     # 2. Dockerfile'ı kullanarak yeni bir imaj oluştur ve onu etiketle.
-    - docker build --pull -t $CONTAINER_REGISTRY_URL:$CI_COMMIT_REF_SLUG Dockerfile_comfyui-cli
+    - docker build --pull -t $CONTAINER_REGISTRY_URL:$CI_COMMIT_REF_SLUG Dockerfile_comfy-cli
     - docker tag $CONTAINER_REGISTRY_URL:$CI_COMMIT_REF_SLUG $CONTAINER_REGISTRY_URL:test
 
     # 3. Oluşturulan imajı GitLab Container Registry'ye gönder.
