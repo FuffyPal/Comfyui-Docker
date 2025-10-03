@@ -27,7 +27,7 @@ build-image:
     - docker push $CONTAINER_REGISTRY_URL:$CI_COMMIT_REF_SLUG
     - docker push $CONTAINER_REGISTRY_URL:latest
 
-build-image-test:
+build-image-cli:
   stage: build
   script:
     # 1. GitLab Container Registry'ye giriş yap. GitLab'in kendi CI/CD değişkenlerini kullanıyoruz.
@@ -35,8 +35,8 @@ build-image-test:
 
     # 2. Dockerfile'ı kullanarak yeni bir imaj oluştur ve onu etiketle.
     - docker build --pull -t $CONTAINER_REGISTRY_URL/comfyui-cli:$CI_COMMIT_REF_SLUG ./comfyui-cli
-    - docker tag $CONTAINER_REGISTRY_URL/comfyui-cli:$CI_COMMIT_REF_SLUG $CONTAINER_REGISTRY_URL/comfyui-cli:test
+    - docker tag $CONTAINER_REGISTRY_URL/comfyui-cli:$CI_COMMIT_REF_SLUG $CONTAINER_REGISTRY_URL/comfyui-cli:latest
 
     # 3. Oluşturulan imajı GitLab Container Registry'ye gönder.
     - docker push $CONTAINER_REGISTRY_URL/comfyui-cli:$CI_COMMIT_REF_SLUG
-    - docker push $CONTAINER_REGISTRY_URL/comfyui-cli:test
+    - docker push $CONTAINER_REGISTRY_URL/comfyui-cli:latest
